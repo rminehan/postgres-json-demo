@@ -1,0 +1,2 @@
+-- Some queries to compare the performance of the
+-- json and jsonb columns for querying
