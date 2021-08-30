@@ -10,7 +10,7 @@
 
 // Generate enough records to make the table big enough to make it easy to
 // spot performance differences between different approaches
-val numRecords = 30 * 1000
+val numRecords = 100 * 1000
 
 val rng = new scala.util.Random(115953)
 
