@@ -9,9 +9,9 @@ WHERE reactions -> 'thilo-come-back' IS NOT NULL;
 
 -- Use the jsonb column
 -- For 100K records, this averaged around 400ms
-SELECT author, reactionsb -> 'cookie' -> 0 AS eager_cookie_giver, reactionsb
+SELECT author, reactionsb -> 'thilo-come-back' -> 0 AS eager_cookie_giver, reactionsb
 FROM slack
-WHERE reactionsb ? 'cookie';
+WHERE reactionsb ? 'thilo-come-back';
 --               ^ Able to use simpler syntax, json doesn't support this
 
 

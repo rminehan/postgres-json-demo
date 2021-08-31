@@ -36,7 +36,7 @@ WHERE reactionsb <@ '{ "cookie": [ "thilo", "pawel", "paul", "rohan" ] }';
 SELECT message, author, reactionsb FROM slack
 WHERE reactionsb ? 'cookie' AND reactionsb <@ '{ "cookie": [ "thilo", "pawel", "paul", "rohan" ] }';
 
--- Making the above looser, find all the messages with a cookie reaction from at least one of
+-- Making the above looser, find all the messages with a cookie reaction from just
 -- thilo, pawel, paul or rohan
 -- (and it's okay to have other reactions and other reactors)
 SELECT reactionsb FROM slack
