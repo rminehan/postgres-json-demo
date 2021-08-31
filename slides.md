@@ -692,7 +692,7 @@ Find the first person to react with `:thilo-come-back:` on messages with that re
 Using `jsonb` column:
 
 ```sql
-SELECT author, reactionsb -> 'thilo-come-back' -> 0 AS eager_cookie_giver, reactionsb
+SELECT author, reactionsb -> 'thilo-come-back' -> 0 AS eager_thilo_fan, reactionsb
 FROM slack
 WHERE reactionsb ? 'thilo-come-back';
 --               ^ Able to use simpler syntax, json doesn't support this
@@ -701,7 +701,7 @@ WHERE reactionsb ? 'thilo-come-back';
 Using `json` column:
 
 ```sql
-SELECT author, reactions -> 'thilo-come-back' -> 0 AS eager_cookie_giver, reactions
+SELECT author, reactions -> 'thilo-come-back' -> 0 AS eager_thilo_fan, reactions
 FROM slack
 WHERE reactions -> 'thilo-come-back' IS NOT NULL;
 ```

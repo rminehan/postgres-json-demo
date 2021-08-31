@@ -33,7 +33,8 @@ val teamMembers = Vector(
   "thilo", "paul", "vish", "vinoth", "zij", "alan", "pawel", "jon", "adrian",
   "mei", "edmond", "sampson", "linh", "rohan", "zack", "willy", "valentine",
   "alvaro", "pratheema", "ritchie", "andrea", "kyle", "lorraine", "aelfric",
-  "clement", "pinxi", "james", "alexandra"
+  "clement", "pinxi", "james", "alexandra",
+  "benny", "agnetha", "anni-frid", "björn"
 )
 
 val channels = Vector(
@@ -56,7 +57,7 @@ type Emoji = String
 type Reactor = String
 case class Record(message: String, author: String, channel: String, reactions: Map[Emoji, List[Reactor]])
 
-val records = List.fill(numRecords) {
+val randomRecords = List.fill(numRecords) {
   val message = {
     val messageSubject = rand(nouns)
     val messageSubjectArticle = article(messageSubject).capitalize
@@ -79,12 +80,36 @@ val records = List.fill(numRecords) {
   Record(message, author, channel, reactions)
 }
 
-// def sanitize(token: String): String = s"\"${token.replace(",", "\\,")}\""
+// To make the demo a bit more predictable,
+// there's some hand generated data.
+// Also makes it easier to sneak some abba-isms in there...
+val fixedRecords = List(
+  Record("Thankyou for the json, the blobs we're searching", "benny", "random", Map(
+    "zio" -> List("zack", "pinxi", "linh", "anni-frid", "paul"),
+    "cookie" -> List("ritchie", "björn", "thilo", "paul", "aelfric", "andrea"),
+    "fear-production" -> List("willy", "adrian", "zij")
+  )),
+  Record("DataIQ, couldn't escape if I wanted to", "zij", "dataiq", Map(
+    "cookie" -> List("thilo", "rohan"),
+    "hugging-face" -> List("rohan"),
+    "let-me-out" -> List("jon", "ritchie", "lulu")
+  )),
+  Record("Mama Mei-a, here we go again", "pratheema", "random", Map(
+    "cookie" -> List("rohan", "pawel", "paul"),
+    "mei-approves" -> List("mei")
+  )),
+  Record("Mama Mei-a, here we go again", "pratheema", "random", Map(
+    "cookie" -> List("rohan", "pawel", "paul"),
+  )),
+  Record("Gimme gimme gimme devops after midnight", "horea", "dev-ops", Map(
+    "devops-parrot" -> List("adil", "anni-frid", "zack", "zij")
+  ))
+)
 
 // Wraps quotes around the input
 def quote(s: String): String = s""""$s""""
 
-val tsvDataLines: List[List[String]] = records.map {
+val tsvDataLines: List[List[String]] = (randomRecords ++ fixedRecords).map {
   case Record(message, author, channel, reactions) =>
     val reactionsJson = reactions.map {
       case (emoji, reactors) =>

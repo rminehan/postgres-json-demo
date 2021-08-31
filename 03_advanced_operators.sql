@@ -19,10 +19,11 @@ SELECT message, author, reactionsb FROM slack WHERE reactionsb @> '{ "cookie": [
 -- ie. we check if there's a "cookie" key
 SELECT message, author, reactionsb FROM slack WHERE reactionsb ? 'cookie';
 
--- Find the 2'th person to give a cookie on each message with a cookie
+-- Find the 2'th person to react with devops-parrot on messages with that reaction
 -- (0 indexed)
 -- Will be null if there's less than 3 people who reacted with cookie
-SELECT message, author, reactionsb, reactionsb -> 'cookie' -> 2 AS sheep FROM slack WHERE reactionsb ? 'cookie';
+SELECT message, author, reactionsb, reactionsb -> 'devops-parrot' -> 2 AS reactor_2
+FROM slack WHERE reactionsb ? 'devops-parrot';
 
 -- Find all the messages with only a cookie reaction and those reactions
 -- are a subset of thilo, pawel, paul or rohan

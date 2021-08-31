@@ -10,11 +10,11 @@ INSERT INTO slack(message, author, channel, reactions, reactionsb) VALUES
 (
   'Thilo has left the channel', 'slack', 'dataiq',
     '{
-      "thilo-come-back": ["rohan", "zij", "clement", "linh"],
+      "thilo-come-back": ["rohan", "zij", "clement", "linh", "agnetha"],
       "sad-parrot": ["zack", "willy", "rohan", "edmond" ]
     }'::json,
     '{
-      "thilo-come-back": ["rohan", "zij", "clement", "linh"],
+      "thilo-come-back": ["rohan", "zij", "clement", "linh", "agnetha"],
       "sad-parrot": ["zack", "willy", "rohan", "edmond" ]
     }'::jsonb
 --          ^
