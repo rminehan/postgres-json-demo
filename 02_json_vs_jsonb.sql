@@ -18,4 +18,10 @@ INSERT INTO slack(message, author, channel, reactions, reactionsb) VALUES
     '{"zzz":["clement","lulu"], "bed":["thilo"], "sleepy":["zij","pawel"] }'::json,
     '{"zzz":["clement","lulu"], "bed":["thilo"], "sleepy":["zij","pawel"] }'::jsonb
 );
+INSERT INTO slack(message, author, channel, reactions, reactionsb) VALUES
+(
+  'paul is the dancing queen', 'jon', 'random',
+    '{"dancing-panda":["rohan","clement"], "pikachu-dancing":["james"]}'::json,
+    '{"dancing-panda":["rohan","clement"], "pikachu-dancing":["james"]}'::jsonb
+);
 SELECT reactions, reactionsb FROM slack WHERE author = 'jon';

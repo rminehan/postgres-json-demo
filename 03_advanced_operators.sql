@@ -10,14 +10,14 @@ FROM 'random_slack_data.tsv'
 DELIMITER E'\t'
 CSV HEADER;
 
+-- Find all the messages where cookies were given at all
+-- ie. we check if there's a "cookie" key
+SELECT message, author, reactionsb FROM slack WHERE reactionsb ? 'cookie';
+
 -- Find all the messages where Thilo awarded a cookie
 -- '@>' is the "contains" operator
 -- "LEFT @> RIGHT" means "LEFT contains RIGHT as json"
 SELECT message, author, reactionsb FROM slack WHERE reactionsb @> '{ "cookie": [ "thilo" ] }';
-
--- Find all the messages where cookies were given at all
--- ie. we check if there's a "cookie" key
-SELECT message, author, reactionsb FROM slack WHERE reactionsb ? 'cookie';
 
 -- Find the 2'th person to react with devops-parrot on messages with that reaction
 -- (0 indexed)
@@ -40,7 +40,7 @@ WHERE reactionsb ? 'cookie' AND reactionsb <@ '{ "cookie": [ "thilo", "pawel", "
 -- Making the above looser, find all the messages with a cookie reaction from just
 -- thilo, pawel, paul or rohan
 -- (and it's okay to have other reactions and other reactors)
-SELECT reactionsb FROM slack
+SELECT message, reactionsb FROM slack
 WHERE reactionsb -> 'cookie' <@ '[ "thilo", "pawel", "paul", "rohan" ]'
 
 -- Find all messages where someone reacted with a cookie or party-parrot
@@ -50,7 +50,7 @@ SELECT message, author, reactionsb FROM slack WHERE reactionsb ?| array[ 'cookie
 
 -- Find all messages where there are reactions for _both_
 -- blond-sassy-grandma-thilo and pink-sassy-grandma-thilo
--- The `&` captures the "or" concept
+-- The `&` captures the "and" concept
 SELECT message, author, reactionsb
 FROM slack
 WHERE reactionsb ?& array[ 'blond-sassy-grandma-thilo', 'pink-sassy-grandma-thilo' ]

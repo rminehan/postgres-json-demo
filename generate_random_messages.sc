@@ -94,12 +94,9 @@ val fixedRecords = List(
     "hugging-face" -> List("rohan"),
     "let-me-out" -> List("jon", "ritchie", "lulu")
   )),
-  Record("Mama Mei-a, here we go again", "pratheema", "random", Map(
+  Record("Mamma Mei-a, here we go again", "pratheema", "random", Map(
     "cookie" -> List("rohan", "pawel", "paul"),
     "mei-approves" -> List("mei")
-  )),
-  Record("Mama Mei-a, here we go again", "pratheema", "random", Map(
-    "cookie" -> List("rohan", "pawel", "paul"),
   )),
   Record("Gimme gimme gimme devops after midnight", "horea", "dev-ops", Map(
     "devops-parrot" -> List("adil", "anni-frid", "zack", "zij")

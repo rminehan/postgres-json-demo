@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Starts an instance of a postgres db for Zij and Rohan's postgres json talk
-# Starts it on port 6677
+# Uses port 6677
 # Currently we're pinning this script to postgres 11.8-alpine to keep things reproducible.
 
 # Usage
-#  ./start_postgres.sh
+#  ./00_start_postgres.sh
 
 docker run \
   --rm \

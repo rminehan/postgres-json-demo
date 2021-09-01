@@ -122,13 +122,15 @@ Rohan: chin wagging
 
 ---
 
-# For fun:
+# Sponsor
 
-Will be some Abba references
+Today's talk is sponsored by Abba
+
+They convinced me to take a chance on them
+
+Will be some subliminal Abba references scattered throughout
 
 Points if you spot them
-
-Take a chance on me
 
 ---
 
@@ -210,7 +212,13 @@ Messages can have reactions
 ```scala
 type Person = String
 type Reaction = String
-case class Message(text: String, author: Person, channel: String, reactions: Map[Reaction, List[Person]])
+
+case class Message(
+  text: String,
+  author: Person,
+  channel: String,
+  reactions: Map[Reaction, List[Person]]
+)
 
 val message = Message("Releasing DataIQ!", "zack", "dataiq", Map(
   "ship-it-parrot" -> List("linh", "rohan", "zij", "willy", "vinoth"),
@@ -218,7 +226,7 @@ val message = Message("Releasing DataIQ!", "zack", "dataiq", Map(
 ))
 ```
 
-Using `List` not set to preserve order of reactions
+(Using `List` not set to preserve order of reactions)
 
 ---
 
@@ -316,7 +324,7 @@ Smokes casually
 
 Will become clearer during the demo
 
-_Generally_ speaking, `json` will make more sense
+_Generally_ speaking, `jsonb` will make more sense
 
 ---
 
@@ -325,15 +333,13 @@ _Generally_ speaking, `json` will make more sense
 To make it easier to compare, we'll see use both in our table
 
 ```
- ----------------------------------------------------------------------------
-| message           | author | channel | reactions: json | reactionsb: jsonb |
- ----------------------------------------------------------------------------
-| Releasing DataIQ! | zack   | dataiq  | { ... }         | { ... }           |
-| Move to LO        | thilo  | dev-ops | { ... }         | { ... }           |
- ----------------------------------------------------------------------------
+ ---------------------------------------------------------------
+| message | ... | reactions: json       | reactionsb: jsonb     |
+ ---------------------------------------------------------------
+| ...     | ... | {cookie:["zij"]}      | {cookie:["zij"]}      |
+| ...     |     | {no-cookie:["thilo"]} | {no-cookie:["thilo"]} |
+ ---------------------------------------------------------------
 ```
-
-Data will be the same in essence
 
 ---
 
@@ -561,36 +567,6 @@ Note: Most of these operators are just for `jsonb` columns
 
 ---
 
-# Contains
-
-`LEFT @> RIGHT` contains operator
-
-Does the left json thingy "contain" the right json thingy
-
-("contain" isn't quite right, but close enough)
-
----
-
-# Contains
-
-```sql
-SELECT * FROM slack
-WHERE reactionsb @> '{ "cookie": [ "jon", "zij" ], "party-parrot": [ "aelfric" ] }'
-```
-
-This will match:
-
-```json
-{
-  "cookie": [ "paul", "thilo", "pratheema", "pinxi", "linh", "zij", "jon", "james" ],
-  "cookie-eaten": [ "alan", "pawel", "ritchie", "pratheema", "zij" ],
-  "party-parrot": [ "adrian", "lorraine", "alexandra", "rohan", "aelfric", "kyle" ],
-  "hurts-real-bad": [ "alvaro", "sampson", "alan", "vish", "pratheema" ]
-}
-```
-
----
-
 # Existence operator
 
 For when you just want to know if it has a key,
@@ -612,11 +588,74 @@ WHERE reactionsb ? 'hurts-real-bad'
 
 ---
 
+# Alternative for json
+
+Only `jsonb` has the existence operator
+
+Can use `->` and `IS NOT NULL` for `json`:
+
+```sql
+-- jsonb
+SELECT message, author, reactionsb FROM slack
+WHERE reactionsb ? 'hurts-real-bad'
+
+-- json
+SELECT message, author, reactions FROM slack
+WHERE reactions -> 'hurts-real-bad' IS NOT NULL
+```
+
+---
+
+# Supported for arrays too
+
+Example:
+
+```sql
+SELECT * FROM slack
+WHERE reactionsb -> 'fear-production' ? 'thilo'
+```
+
+---
+
+# Contains
+
+`LEFT @> RIGHT` contains operator
+
+Does the left json thingy "contain" the right json thingy
+
+("contain" isn't quite right, but close enough)
+
+Good for "at least/minimal" logic
+
+---
+
+# Contains
+
+```sql
+SELECT * FROM slack
+WHERE reactionsb @> '{ "cookie": [ "jon", "zij" ], "party-parrot": [ "aelfric" ] }'
+```
+
+This will match:
+
+```json
+{
+  "cookie": [ "paul", "pratheema", "pinxi", "linh", "zij", "james", "jon" ],
+  "cookie-eaten": [ "alan", "pawel", "pratheema", "zij" ],
+  "party-parrot": [ "adrian", "lorraine", "alexandra", "aelfric", "kyle" ],
+  "hurts-real-bad": [ "alvaro", "sampson", "vish", "pratheema" ]
+}
+```
+
+---
+
 # Contains the other way
 
 `LEFT <@ RIGHT` contains operator
 
 Does the right json thingy "contain" the left json thingy
+
+Good for "at most/maximal" logic
 
 ---
 
@@ -627,7 +666,7 @@ SELECT reactionsb FROM slack
 WHERE reactionsb -> 'cookie' <@ '[ "thilo", "pawel", "paul", "rohan" ]'
 ```
 
-Will find:
+Will match:
 
 ```json
 {
@@ -637,7 +676,7 @@ Will find:
 }
 ```
 
-Won't find:
+Won't match:
 
 ```json
 {
@@ -689,21 +728,21 @@ Find the first person to react with `:thilo-come-back:` on messages with that re
 
 > Find the first person to react with `:thilo-come-back:` on messages with that reaction
 
-Using `jsonb` column:
-
-```sql
-SELECT author, reactionsb -> 'thilo-come-back' -> 0 AS eager_thilo_fan, reactionsb
-FROM slack
-WHERE reactionsb ? 'thilo-come-back';
---               ^ Able to use simpler syntax, json doesn't support this
-```
-
 Using `json` column:
 
 ```sql
 SELECT author, reactions -> 'thilo-come-back' -> 0 AS eager_thilo_fan, reactions
 FROM slack
 WHERE reactions -> 'thilo-come-back' IS NOT NULL;
+```
+
+Using `jsonb` column:
+
+```sql
+SELECT author, reactionsb -> 'thilo-come-back' -> 0 AS eager_thilo_fan, reactionsb
+FROM slack
+WHERE reactionsb ? 'thilo-come-back';
+--               ^ Able to use simpler syntax
 ```
 
 ---
@@ -873,6 +912,12 @@ Postgres docs are quite good
 - [json functions](https://www.postgresql.org/docs/13/functions-json.html)
 
 There is also xpath support
+
+---
+
+# Abba Gurus?
+
+Any standout super trouper abba fans?
 
 ---
 
