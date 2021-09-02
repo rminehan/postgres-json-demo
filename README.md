@@ -6,7 +6,7 @@ Overall the presentation is just trying to get across the general idea of the `j
 It doesn't try to cover things in detail.
 
 More details can be found in the official postgres docs
-[here](https://www.postgresql.org/docs/13/functions-json.html)
+[here](https://www.postgresql.org/docs/13/datatype-json.html)
 and
 [here](https://www.postgresql.org/docs/13/functions-json.html).
 
