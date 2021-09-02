@@ -93,6 +93,13 @@ A bit icky
 
 - joins
 
+```sql
+SELECT *
+FROM leads AS l INNER JOIN signals AS s ON l.id = s.lead_id
+FROM company_locations AS c ON l.company_id = c.id
+WHERE ...
+```
+
 ---
 
 # Quick poll
