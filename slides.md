@@ -32,13 +32,13 @@ title: Postgres and Json
 Postgres has had basic json support for a while now
 
 ```
------------------------------------------------
-name  | hobbies
------------------------------------------------
-paul  | ["zio", "dancing"]"
-thilo | ["standup comedy", "correcting typos"]
-rohan | ["parrots"]
------------------------------------------------
+ ------------------------------------------------
+| name  | hobbies                                |
+ ------------------------------------------------
+| paul  | ["zio", "dancing"]"                    |
+| thilo | ["standup comedy", "correcting typos"] |
+| rohan | ["parrots"]                            |
+ ------------------------------------------------
 ```
 
 Not everyone knows about it
@@ -95,6 +95,20 @@ A bit icky
 
 ---
 
+# Quick poll
+
+What familiarity do you already have with this?
+
+- no familiarity
+
+
+- a bit
+
+
+- fairly comfortable
+
+---
+
 # Get excited!
 
 Aim for today is to get you excited about json and postgres
@@ -135,9 +149,6 @@ Points if you spot them
 ---
 
 # Agenda
-
-- getting a postgres table setup with json columns
-
 
 - play around inserting a few documents
 
@@ -194,9 +205,10 @@ Each record is a message from slack
 Messages can have reactions
 
 ```
-(Zack) Releasing DataIQ!
-+:ship-it-parrot: [ "linh", "rohan", "zij", "willy", "vinoth" ]
-+:fear-production: [ "rohan" ]
+#dataiq
+  Zack: Releasing DataIQ!
+    ship-it-parrot: [ "linh", "rohan", "zij", "willy", "vinoth" ]
+    fear-production: [ "rohan" ]
 ```
 
 ---
@@ -204,9 +216,10 @@ Messages can have reactions
 # If it were scala code 
 
 ```
-(Zack) Releasing DataIQ!
-+:ship-it-parrot: [ "linh", "rohan", "zij", "willy", "vinoth" ]
-+:fear-production: [ "rohan" ]
+#dataiq
+  Zack: Releasing DataIQ!
+    ship-it-parrot: [ "linh", "rohan", "zij", "willy", "vinoth" ]
+    fear-production: [ "rohan" ]
 ```
 
 ```scala
@@ -343,7 +356,9 @@ To make it easier to compare, we'll see use both in our table
 
 ---
 
-# If you want to follow on the beast
+# If you want to follow along
+
+There is a db setup on the beast
 
 Start redshift prod vpn
 
@@ -356,19 +371,11 @@ ssh -L 6677:localhost:6677 beast
 
 ---
 
-# If you want to run your own db locally
+# If you want to replicate this locally
 
-```bash
-$ ./00_start_postgres.sh
-```
+See the README.md on the repo
 
-Spins up a docker container
-
-Postgres running in port 6677
-
-(Or you might already have some postgres sandbox)
-
-(Don't use prod though)
+Not too hard
 
 ---
 
@@ -394,11 +401,9 @@ Can cause confusion with some demos
 
 ---
 
-# Creating the slack table
+# To save time...
 
-See `./01_introductions.sql`
-
-Run the `CREATE TABLE ...` command into your client
+Table is already generated and has ~100K rows
 
 ```sql
 CREATE TABLE IF NOT EXISTS slack (
@@ -412,13 +417,19 @@ CREATE TABLE IF NOT EXISTS slack (
 );
 ```
 
+---
+
+# Section 1
+
+To the client!
+
 We'll leave the slides and follow the snippets for a while
 
 ---
 
 # Summarizing section 1
 
-Baton pass to Rohan
+`:batton-pass:` to Rohan
 
 ---
 
@@ -525,39 +536,9 @@ Impacts:
 
 `03_advanced_operators.sql`
 
-Look into more funky json operators
-
-For that we'll need more data
-
----
-
-# Generating data
-
-The script `generate_random_messages.sc` creates a tsv file with 100K random rows
-
-
-- clear the current table
-
-
-- run the script
-
-
-- copy the tsv file into the docker container
-
-
-- run a `COPY` command to load it
-
-Let's do it!
-
----
-
-# Advanced operations
-
-Now we have meaningfully sized data
+Look into more funky json operators (many just for `jsonb`)
 
 To the snippets!
-
-Note: Most of these operators are just for `jsonb` columns
 
 ---
 

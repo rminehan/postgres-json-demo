@@ -1,11 +1,7 @@
-CREATE TABLE IF NOT EXISTS slack (
-  message text NOT NULL,
-  author text NOT NULL,
-  channel text NOT NULL,
-  reactions json NOT NULL,
-  reactionsb jsonb NOT NULL
-);
+-- Explore our table
+SELECT * FROM slack LIMIT 100;
 
+-- Inserting a document
 INSERT INTO slack(message, author, channel, reactions, reactionsb) VALUES
 (
   'Thilo has left the channel', 'slack', 'dataiq',
@@ -19,6 +15,7 @@ INSERT INTO slack(message, author, channel, reactions, reactionsb) VALUES
     }'::jsonb
 --          ^
 );
+SELECT * FROM slack WHERE author = 'slack';
 
 -- Should fail as it's not valid json
 INSERT INTO slack(message, author, channel, reactions, reactionsb) VALUES

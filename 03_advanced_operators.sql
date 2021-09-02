@@ -1,15 +1,3 @@
--- Remove the little examples from previous sections
-DELETE FROM slack;
-
--- Use this to load some random data in
--- There is an ammonite script that generates this
--- You'll need to copy the data into the postgres container
--- (see instructions in ammonite script)
-COPY slack(message, author, channel, reactions, reactionsb)
-FROM 'random_slack_data.tsv'
-DELIMITER E'\t'
-CSV HEADER;
-
 -- Find all the messages where cookies were given at all
 -- ie. we check if there's a "cookie" key
 SELECT message, author, reactionsb FROM slack WHERE reactionsb ? 'cookie';
