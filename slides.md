@@ -701,6 +701,39 @@ Won't match:
 
 ---
 
+
+# Mama-Mia! `@` Which-a-way?
+
+
+If you have:
+```json
+{
+  "cookie": [ "rohan", "pawel" ],
+  "thilo-shrugging": [ "willy", "thilo", "edmond", "jon" ]
+},
+{
+  "cookie": [ "rohan", "pawel" ],
+  "thilo-shrugging": [ "willy", "thilo" ]
+}
+```
+
+```sql
+SELECT reactionsb FROM slack
+WHERE reactionsb -> 'thilo-shrugging' @> '[ "willy", "thilo" ]'
+```
+
+will match both whereas
+
+```sql
+SELECT reactionsb FROm slack
+WHERE reactionsb -> 'thilo-shrugging' <@ '[ "willy", "thilo" ]'
+```
+
+will match only the second
+
+
+---
+
 # And many more
 
 We saw `?|` and `?&` but there's many more!
