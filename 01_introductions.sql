@@ -51,7 +51,7 @@ INSERT INTO slack(message, author, channel, reactions, reactionsb) VALUES
       "aha!": ["camilo", 10]
     }'::jsonb
 );
-SELECT author, message, reactionsb FROM slack WHERE author = 'vinoth';
+SELECT author, message, reactionsb FROM slack WHERE message = 'Voulez-Vous';
 
 -- The projection operator
 SELECT message, reactions->'thilo-come-back' AS thilo_come_back, reactions FROM slack
