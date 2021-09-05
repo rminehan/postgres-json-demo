@@ -7,7 +7,7 @@ INSERT INTO slack(message, author, channel, reactions, reactionsb) VALUES
 );
 -- In a good client like pgAdmin you'll be able to see the difference between the two
 -- sqlectron hides the difference
-SELECT reactions, reactionsb FROM slack WHERE author = 'paul';
+SELECT reactions, reactionsb FROM slack WHERE message = 'Zio has a thing for that';
 
 
 -- jsonb may change the order of keys in json objects based on its internal storage rules
@@ -24,4 +24,4 @@ INSERT INTO slack(message, author, channel, reactions, reactionsb) VALUES
     '{"dancing-panda":["rohan","clement"], "pikachu-dancing":["james"]}'::json,
     '{"dancing-panda":["rohan","clement"], "pikachu-dancing":["james"]}'::jsonb
 );
-SELECT reactions, reactionsb FROM slack WHERE author = 'jon';
+SELECT reactions, reactionsb FROM slack WHERE message IN ('can we make the meeting at 10am? I have an appointment with my pillow at 9', 'paul is the dancing queen';

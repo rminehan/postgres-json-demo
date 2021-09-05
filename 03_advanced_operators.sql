@@ -1,3 +1,14 @@
+-- Delete data from before
+DELETE FROM slack
+WHERE message IN (
+	'Thilo has left the channel',
+	'Where can I buy vegemite?',
+	'Voulez-Vous',
+	'Zio has a thing for that',
+	'can we make the meeting at 10am? I have an appointment with my pillow at 9',
+	'paul is the dancing queen'
+)
+
 -- Find all the messages where cookies were given at all
 -- ie. we check if there's a "cookie" key
 SELECT message, author, reactionsb FROM slack WHERE reactionsb ? 'cookie';
