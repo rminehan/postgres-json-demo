@@ -18,7 +18,7 @@ The `00` files are for setting up the db (below) and were done before the talk t
 
 # Replicating the db locally
 
-The script `00_setup_table.sql` can be used to start a postgres container on port 6677.
+The script `00_start_postgres.sh` can be used to start a postgres container on port 6677.
 
 To put meaningful data into the table, run the ammonite script and copy the tsv file it creates into the docker container:
 
