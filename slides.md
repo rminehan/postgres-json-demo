@@ -350,32 +350,6 @@ Will become clearer during the demo
 
 _Generally_ speaking, `jsonb` will make more sense
 
----
-
-# Side note
-
-```
- -------------------------------------------------
-|                     | json   | jsonb            |
- -------------------------------------------------
-| storage             | text   | optimized parsed |
-|                     |        | binary format    |
- -------------------------------------------------
-```
-
-Q: You might be asking: what are the size limits of these data types?
-
-A: It's not documented but from SO answers that looked at source code:
-- json is backed by text, so ~1GB 
-- jsonb ~255MB
-
-
-Alt Ans: The reason why it's not in the docs is possibly because if you're inserting such big docs
-into a column, you're probably doing something wrong...
-
-
-(relevant csqw: a record zij pulled was 120k [not very wordy] lines was only ~9MB for scale)
-
 
 ---
 
@@ -567,6 +541,32 @@ Impacts:
 | time to query       | slower | faster           |
  -------------------------------------------------
 ```
+
+---
+
+# Side note
+
+```
+ -------------------------------------------------
+|                     | json   | jsonb            |
+ -------------------------------------------------
+| storage             | text   | optimized parsed |
+|                     |        | binary format    |
+ -------------------------------------------------
+```
+
+Q: You might be asking: what are the size limits of these data types?
+
+A: It's not documented but from SO answers that looked at source code:
+- json is backed by text, so ~1GB 
+- jsonb ~255MB
+
+
+Alt Ans: The reason why it's not in the docs is possibly because if you're inserting such big docs
+into a column, you're probably doing something wrong...
+
+
+(relevant csqw: a record zij pulled was 120k [not very wordy] lines was only ~9MB for scale)
 
 ---
 
