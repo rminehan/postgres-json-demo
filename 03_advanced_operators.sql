@@ -18,12 +18,6 @@ SELECT message, author, reactionsb FROM slack WHERE reactionsb ? 'cookie';
 -- "LEFT @> RIGHT" means "LEFT contains RIGHT as json"
 SELECT message, author, reactionsb FROM slack WHERE reactionsb @> '{ "cookie": [ "thilo" ] }';
 
--- Find the 2'th person to react with devops-parrot on messages with that reaction
--- (0 indexed)
--- Will be null if there's less than 3 people who reacted with cookie
-SELECT message, author, reactionsb, reactionsb -> 'devops-parrot' -> 2 AS reactor_2
-FROM slack WHERE reactionsb ? 'devops-parrot';
-
 -- Find all the messages with only a cookie reaction and those reactions
 -- are a subset of thilo, pawel, paul or rohan
 -- Note the order of the "contains" operator is reversed from above
@@ -53,3 +47,9 @@ SELECT message, author, reactionsb FROM slack WHERE reactionsb ?| array[ 'cookie
 SELECT message, author, reactionsb
 FROM slack
 WHERE reactionsb ?& array[ 'blond-sassy-grandma-thilo', 'pink-sassy-grandma-thilo' ]
+
+-- Find the 2'th person to react with devops-parrot on messages with that reaction
+-- (0 indexed)
+-- Will be null if there's less than 3 people who reacted with cookie
+SELECT message, author, reactionsb, reactionsb -> 'devops-parrot' -> 2 AS reactor_2
+FROM slack WHERE reactionsb ? 'devops-parrot';
