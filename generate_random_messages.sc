@@ -95,11 +95,30 @@ val fixedRecords = List(
     "let-me-out" -> List("jon", "ritchie", "lulu")
   )),
   Record("Mamma Mei-a, here we go again", "pratheema", "random", Map(
-    "cookie" -> List("rohan", "pawel", "paul"),
+    "cookie" -> List("rohan", "thilo", "pawel", "paul"),
+    "zio" -> List("paul", "jon"),
     "mei-approves" -> List("mei")
   )),
   Record("Gimme gimme gimme devops after midnight", "horea", "dev-ops", Map(
     "devops-parrot" -> List("adil", "anni-frid", "zack", "zij")
+  )),
+  Record("Linh! Linh! Why don't you give me a code review?", "willy", "dataiq", Map(
+    "cookie-ask" -> List("linh"),
+    "cookie-tell" -> List("linh"),
+    "no-cookie" -> List("willy"),
+    "phone" -> List("rohan", "zij")
+  )),
+  Record("Look into his Enxhell eyes, one look and you're hypnotised", "james", "dev", Map(
+    "cookie-ask" -> List("james"),
+    "cookie-tell" -> List("james"),
+    "no-cookie" -> List("enxhell"),
+    "party-enxhell" -> List("clement", "rohan", "zij")
+  )),
+  Record("My my! At code review, Andrea did surrender", "thilo", "dev-front-end", Map(
+    "cookie-ask" -> List("thilo", "paul"),
+    "cookie-tell" -> List("thilo", "edmond"),
+    "no-cookie" -> List("andrea", "edy"),
+    "cop-parrot" -> List("linh", "pawel", "james", "enxhell")
   ))
 )
 

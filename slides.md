@@ -27,6 +27,18 @@ title: Postgres and Json
 
 ---
 
+# Sponsor
+
+Today's talk is sponsored by Abba
+
+They convinced me to take a chance on them
+
+Will be some subliminal Abba references scattered throughout
+
+Points if you spot them
+
+---
+
 # What's today about?
 
 Postgres has had basic json support for a while now
@@ -50,6 +62,10 @@ Not everyone knows about it
 One reason:
 
 > You can get more work done without joins
+
+Want to know more?
+
+> I do, I do, I do, I do, I do
 
 ---
 
@@ -140,18 +156,6 @@ Zij-Rohan tag teaming
 Zij: demo these features
 
 Rohan: chin wagging
-
----
-
-# Sponsor
-
-Today's talk is sponsored by Abba
-
-They convinced me to take a chance on them
-
-Will be some subliminal Abba references scattered throughout
-
-Points if you spot them
 
 ---
 
@@ -857,6 +861,14 @@ Docs are very detailed
 
 # Have you been listening?
 
+Get the audience to come up with some queries
+
+The winner takes it all
+
+---
+
+# Example 1
+
 Sql query to answer this:
 
 > Find all slack messages where:
@@ -875,7 +887,7 @@ Sql query to answer this:
 
 ---
 
-# Example solution
+# Example 1 solution
 
 ```sql
 SELECT author, message, reactionsb
@@ -889,15 +901,33 @@ WHERE
   reactionsb ? 'zio'
 ```
 
-Hit one record:
+---
 
-```json
-{
-  "zio": [ "zack", "pinxi", "linh", "paul" ],
-  "cookie": [ "ritchie", ..., "thilo", "paul", "aelfric", "andrea" ],
-  "ship-it-parrot": [ ... ],
-  "fear-production": [ "willy", "adrian", "zij" ]
-}
+# Example 2 question
+
+Sql query to answer this:
+
+> Find all the records where
+>
+> there were reactions for all of these emojis:
+>
+> cookie-ask, cookie-tell, no-cookie
+>
+> AND
+>
+> reactions for at least one of these emojies:
+>
+> running-thilo, party-enxhell, phone, cop-parrot
+
+---
+
+# Example 2 solution
+
+```sql
+SELECT author, message, reactionsb
+FROM slack
+WHERE reactionsb ?& array[ 'cookie-ask', 'cookie-tell', 'no-cookie' ]
+AND reactionsb ?| array[ 'running-thilo', 'party-enxhell', 'phone' ]
 ```
 
 ---
@@ -921,6 +951,10 @@ ie. want you to know it exists and get the gist without too much detail
 > (Postgres) If you change your mind, I'm the first in line
 >
 > (Mongo) I tried to hold you back but you were stronger
+>
+> (Postgres) Don't, go, cha-sing af-ter mon-go, lay, all your search, on, me
+>
+> (Mongo) Knowing me, knowing you, there is nothing you can't do
 
 ---
 
