@@ -423,6 +423,8 @@ Host: localhost
 
 Port: 6677
 
+Username: `postgres`
+
 DB Password: `boban_jones`
 
 No fancy stuff
