@@ -24,4 +24,4 @@ INSERT INTO slack(message, author, channel, reactions, reactionsb) VALUES
     '{"dancing-panda":["rohan","clement"], "pikachu-dancing":["james"]}'::json,
     '{"dancing-panda":["rohan","clement"], "pikachu-dancing":["james"]}'::jsonb
 );
-SELECT reactions, reactionsb FROM slack WHERE message IN ('can we make the meeting at 10am? I have an appointment with my pillow at 9', 'paul is the dancing queen';
+SELECT reactions, reactionsb FROM slack WHERE message IN ('can we make the meeting at 10am? I have an appointment with my pillow at 9', 'paul is the dancing queen');
