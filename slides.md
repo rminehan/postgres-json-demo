@@ -758,17 +758,10 @@ Query performance of `json` vs `jsonb`
 
 # From the [docs](https://www.postgresql.org/docs/13/datatype-json.html)
 
-> The json data type stores an exact copy of the input text,
->
-> which processing functions must reparse on each execution;
->
-> while jsonb data is stored in a decomposed binary format
->
-> that makes it slightly slower to input due to added conversion overhead,
->
-> but significantly faster to process, since no reparsing is needed
+- jsonb is parsed once on loading
 
-We'll focused on the search
+
+- json is parsed on every query
 
 ---
 
