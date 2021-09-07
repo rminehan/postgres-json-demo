@@ -309,7 +309,7 @@ We all know `json`, who is `jsonb`?
 
 # jsonb
 
-> who is `jsonb`?
+> who is jsonb?
 
 `json`'s cool older brother
 
@@ -638,13 +638,13 @@ For when you just want to know if it has a key,
 
 but don't care about the value
 
-> Find the messages where someone reacted with `:hurts-real-bad:`
+> Find the messages where someone reacted with :hurts-real-bad:
 
 ---
 
 # Existence operator
 
-> Find the messages where someone reacted with `:hurts-real-bad:`
+> Find the messages where someone reacted with :hurts-real-bad:
 
 ```sql
 SELECT message, author, reactionsb FROM slack
@@ -817,7 +817,7 @@ Find the first person to react with `:thilo-come-back:` on messages with that re
 
 # To sql
 
-> Find the first person to react with `:thilo-come-back:` on messages with that reaction
+> Find the first person to react with :thilo-come-back: on messages with that reaction
 
 Using `json` column:
 
