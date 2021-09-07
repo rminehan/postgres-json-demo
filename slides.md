@@ -199,7 +199,7 @@ Slides and scripts are on [github](https://github.com/rminehan/postgres-json-dem
 
 You can spin up your own db in docker
 
-You can follow along on the beast
+You can follow along on the beast if you have limited edition Redshift VPN
 
 ---
 
