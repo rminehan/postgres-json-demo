@@ -544,7 +544,7 @@ Impacts:
 
 ---
 
-# Side note
+# Aside: Size limits
 
 ```
  -------------------------------------------------
@@ -555,18 +555,62 @@ Impacts:
  -------------------------------------------------
 ```
 
-Q: You might be asking: what are the size limits of these data types?
+You might be asking:
 
-A: It's not documented but from SO answers that looked at source code:
-- json is backed by text, so ~1GB 
+> What are the size limits of these data types?
+
+---
+
+# Aside: Size limits
+
+```
+ -------------------------------------------------
+|                     | json   | jsonb            |
+ -------------------------------------------------
+| storage             | text   | optimized parsed |
+|                     |        | binary format    |
+ -------------------------------------------------
+```
+
+> What are the size limits of these data types?
+
+Not documented, but from SO:
+
+- json is backed by text, so ~1GB
+
+
 - jsonb ~255MB
 
+---
 
-Alt Ans: The reason why it's not in the docs is possibly because if you're inserting such big docs
-into a column, you're probably doing something wrong...
+# Shouldn't hit the limit
+
+> Not documented
+
+Potentially because you shouldn't be inserting such big docs
+
+Maybe doing something wrong
+
+> If you're exceeding, darling then you're n00bing, S.O.S!
+
+---
+
+# Case Study: Old Man Zij rambling
+
+After a tour of duty in csqw,
+
+Zij has earnt the right to bore us with war stories
+
+---
+
+# Zij's war story
+
+Document with 120k lines is only ~9MB
+
+- json is backed by text, so ~1GB
 
 
-(relevant csqw: a record zij pulled was 120k [not very wordy] lines was only ~9MB for scale)
+- jsonb ~255MB
 
 ---
 
