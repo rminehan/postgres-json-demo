@@ -50,6 +50,6 @@ WHERE reactionsb ?& array[ 'blond-sassy-grandma-thilo', 'pink-sassy-grandma-thil
 
 -- Find the 2'th person to react with devops-parrot on messages with that reaction
 -- (0 indexed)
--- Will be null if there's less than 3 people who reacted with cookie
+-- Will be null if there's less than 3 people who reacted with devops-parrot
 SELECT message, author, reactionsb, reactionsb -> 'devops-parrot' -> 2 AS reactor_2
 FROM slack WHERE reactionsb ? 'devops-parrot';
